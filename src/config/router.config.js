@@ -5,7 +5,6 @@ import { UserLayout, TabLayout, RouteView, BlankLayout, PageView } from '@/compo
  * @type {[null,null]}
  */
 export const asyncRouterMap = [
-
   {
     path: '/',
     name: 'dashboard',
@@ -13,64 +12,62 @@ export const asyncRouterMap = [
     meta: { title: '首页' },
     redirect: '/dashboard/analysis',
     children: [
-
-      // // dashboard
+      // dashboard
       // {
       //   path: '/dashboard',
       //   name: 'dashboard',
       //   redirect: '/dashboard/workplace',
       //   component: RouteView,
-      //   meta: { title: '仪表盘', icon: 'dashboard', permission: [ 'dashboard' ] },
+      //   meta: { title: '仪表盘', icon: 'dashboard', permission: ['dashboard'] },
       //   children: [
       //     {
       //       path: '/dashboard/analysis',
       //       name: 'Analysis',
       //       component: () => import('@/views/dashboard/Analysis'),
-      //       meta: { title: '分析页', permission: [ 'dashboard' ] }
+      //       meta: { title: '分析页', permission: ['dashboard'] }
       //     },
       //     {
       //       path: '/dashboard/monitor',
       //       name: 'Monitor',
       //       hidden: true,
       //       component: () => import('@/views/dashboard/Monitor'),
-      //       meta: { title: '监控页', permission: [ 'dashboard' ] }
+      //       meta: { title: '监控页', permission: ['dashboard'] }
       //     },
       //     {
       //       path: '/dashboard/workplace',
       //       name: 'Workplace',
       //       component: () => import('@/views/dashboard/Workplace'),
-      //       meta: { title: '工作台', permission: [ 'dashboard' ] }
+      //       meta: { title: '工作台', permission: ['dashboard'] }
       //     }
       //   ]
-      // },
-      //
-      // // forms
+      // }
+      // forms
       // {
       //   path: '/form',
       //   redirect: '/form/basic-form',
       //   component: PageView,
-      //   meta: { title: '表单页', icon: 'form', permission: [ 'form' ] },
+      //   meta: { title: '表单页', icon: 'form', permission: ['form'] },
       //   children: [
       //     {
       //       path: '/form/base-form',
       //       name: 'BaseForm',
       //       component: () => import('@/views/form/BasicForm'),
-      //       meta: { title: '基础表单', permission: [ 'form' ] }
+      //       meta: { title: '基础表单', permission: ['form'] }
       //     },
       //     {
       //       path: '/form/step-form',
       //       name: 'StepForm',
       //       component: () => import('@/views/form/stepForm/StepForm'),
-      //       meta: { title: '分步表单', permission: [ 'form' ] }
+      //       meta: { title: '分步表单', permission: ['form'] }
       //     },
       //     {
       //       path: '/form/advanced-form',
       //       name: 'AdvanceForm',
       //       component: () => import('@/views/form/advancedForm/AdvancedForm'),
-      //       meta: { title: '高级表单', permission: [ 'form' ] }
+      //       meta: { title: '高级表单', permission: ['form'] }
       //     }
       //   ]
-      // },
+      // }
       //
       // // list
       // {
@@ -285,7 +282,9 @@ export const asyncRouterMap = [
     ]
   },
   {
-    path: '*', redirect: '/404', hidden: true
+    path: '*',
+    redirect: '/404',
+    hidden: true
   }
 ]
 
@@ -319,7 +318,7 @@ export const constantRouterMap = [
         path: 'alteration',
         name: 'alteration',
         component: () => import(/* webpackChunkName: "user" */ '@/views/user/alteration/Alteration')
-      },
+      }
     ]
   },
 
@@ -358,7 +357,7 @@ export const constantRouterMap = [
         path: 'login',
         name: 'oauth2-app-login',
         component: () => import(/* webpackChunkName: "oauth2-app.login" */ '@/views/user/oauth2/OAuth2Login')
-      },
+      }
     ]
   },
 
@@ -377,6 +376,5 @@ export const constantRouterMap = [
   {
     path: '/404',
     component: () => import(/* webpackChunkName: "fail" */ '@/views/exception/404')
-  },
-
+  }
 ]

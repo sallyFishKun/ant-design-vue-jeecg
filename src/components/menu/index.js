@@ -26,7 +26,7 @@ export default {
       default: false
     }
   },
-  data () {
+  data() {
     return {
       openKeys: [],
       selectedKeys: [],
@@ -40,11 +40,11 @@ export default {
       return keys
     }
   },
-  mounted () {
+  mounted() {
     this.updateMenu()
   },
   watch: {
-    collapsed (val) {
+    collapsed(val) {
       if (val) {
         this.cachedOpenKeys = this.openKeys.concat()
         this.openKeys = []
@@ -52,14 +52,14 @@ export default {
         this.openKeys = this.cachedOpenKeys
       }
     },
-    $route: function () {
+    $route: function() {
+      console.log('dddddd')
       this.updateMenu()
     }
   },
   methods: {
     // select menu item
-    onOpenChange (openKeys) {
-
+    onOpenChange(openKeys) {
       // 在水平模式下时执行，并且不再执行后续
       if (this.mode === 'horizontal') {
         this.openKeys = openKeys
@@ -73,7 +73,7 @@ export default {
         this.openKeys = latestOpenKey ? [latestOpenKey] : []
       }
     },
-    updateMenu () {
+    updateMenu() {
       const routes = this.$route.matched.concat()
       const { hidden } = this.$route.meta
       if (routes.length >= 3 && hidden) {
@@ -103,7 +103,7 @@ export default {
       // update-end-author:sunjianlei date:20210409 for: 修复动态功能测试菜单、带参数菜单标题错误、展开错误的问题
 
       //update-begin-author:taoyan date:20190510 for:online表单菜单点击展开的一级目录不对
-      if(!this.selectedKeys || this.selectedKeys[0].indexOf(":")<0){
+      if (!this.selectedKeys || this.selectedKeys[0].indexOf(':') < 0) {
         this.collapsed ? (this.cachedOpenKeys = openKeys) : (this.openKeys = openKeys)
       }
       //update-end-author:taoyan date:20190510 for:online表单菜单点击展开的一级目录不对
@@ -127,17 +127,19 @@ export default {
     // update-end-author:sunjianlei date:20210409 for: 修复动态功能测试菜单、带参数菜单标题错误、展开错误的问题
 
     // render
-    renderItem (menu) {
+    renderItem(menu) {
       if (!menu.hidden) {
         return menu.children && !menu.alwaysShow ? this.renderSubMenu(menu) : this.renderMenuItem(menu)
       }
       return null
     },
-    renderMenuItem (menu) {
+    renderMenuItem(menu) {
       const target = menu.meta.target || null
-      const tag = target && 'a' || 'router-link'
+      const tag = (target && 'a') || 'router-link'
+      // /bpm/task/
+      // console.log('----', menu.path)
       let props = { to: { name: menu.name } }
-      if(menu.route && menu.route === '0'){
+      if (menu.route && menu.route === '0') {
         props = { to: { path: menu.path } }
       }
 
@@ -161,7 +163,7 @@ export default {
         </Item>
       )
     },
-    renderSubMenu (menu) {
+    renderSubMenu(menu) {
       const itemArr = []
       if (!menu.alwaysShow) {
         menu.children.forEach(item => itemArr.push(this.renderItem(item)))
@@ -169,6 +171,7 @@ export default {
       return (
         <SubMenu {...{ key: menu.path }}>
           <span slot="title">
+            {menu.path}
             {this.renderIcon(menu.meta.icon)}
             <span>{menu.meta.title}</span>
           </span>
@@ -176,19 +179,17 @@ export default {
         </SubMenu>
       )
     },
-    renderIcon (icon) {
+    renderIcon(icon) {
       if (icon === 'none' || icon === undefined) {
         return null
       }
       const props = {}
-      typeof (icon) === 'object' ? props.component = icon : props.type = icon
-      return (
-        <Icon {... { props } }/>
-      )
+      typeof icon === 'object' ? (props.component = icon) : (props.type = icon)
+      return <Icon {...{ props }} />
     }
   },
 
-  render () {
+  render() {
     const { mode, theme, menu } = this
     const props = {
       mode: mode,
